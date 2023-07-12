@@ -2,7 +2,7 @@ package com.tallyto.algamoney.algamoney.resource;
 
 import com.tallyto.algamoney.algamoney.model.Categoria;
 import com.tallyto.algamoney.algamoney.repository.CategoriaRepository;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -31,7 +31,7 @@ public class CategoriaResource {
     }
 
     @PostMapping
-    public ResponseEntity<Categoria> criar(@RequestBody Categoria categoria, HttpServletResponse response) {
+    public ResponseEntity<Categoria> criar(@Valid @RequestBody Categoria categoria) {
       var categoriaSalva = this.categoriaRepository.save(categoria);
       var uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}")
                 .buildAndExpand(categoriaSalva.getCodigo()).toUri();

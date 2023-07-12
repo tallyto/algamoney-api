@@ -10,20 +10,45 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @ControllerAdvice
-public class ExceptionHandler extends ResponseEntityExceptionHandler
-{
+public class ExceptionHandler extends ResponseEntityExceptionHandler {
     @Autowired
     private MessageSource messageSource;
+
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         var mensagem = messageSource.getMessage("mensagem.invalida", null, LocaleContextHolder.getLocale());
         var devMessage = ex.getCause().getMessage();
-        return handleExceptionInternal(ex, new ErroHandler(mensagem, devMessage), headers, HttpStatus.BAD_REQUEST, request);
+        var erros = Arrays.asList(new ErroHandler(mensagem, devMessage));
+        return handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST, request);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+
+        var erros = criarListaDeErros(ex.getBindingResult());
+        return handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST, request);
+    }
+
+    private List<ErroHandler> criarListaDeErros(BindingResult bindingResult) {
+        var erros = new ArrayList<ErroHandler>();
+        for (FieldError fieldError : bindingResult.getFieldErrors()) {
+            var mensagemUsuario = messageSource.getMessage(fieldError, LocaleContextHolder.getLocale());
+            var mensagemDesenvolvedor = fieldError.toString();
+            erros.add(new ErroHandler(mensagemUsuario, mensagemDesenvolvedor));
+        }
+        return erros;
     }
 
     @Getter
@@ -31,6 +56,7 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler
     public static class ErroHandler {
         String userMessage;
         String devMessage;
+
         public ErroHandler(String userMessage, String devMessage) {
             this.userMessage = userMessage;
             this.devMessage = devMessage;
