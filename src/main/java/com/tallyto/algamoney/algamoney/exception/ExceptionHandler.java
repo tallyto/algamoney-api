@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -30,7 +31,7 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         var mensagem = messageSource.getMessage("mensagem.invalida", null, LocaleContextHolder.getLocale());
         var devMessage = ex.getCause().getMessage();
-        var erros = Arrays.asList(new ErroHandler(mensagem, devMessage));
+        var erros = List.of(new ErroHandler(mensagem, devMessage));
         return handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST, request);
     }
 
@@ -38,6 +39,13 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         var erros = criarListaDeErros(ex.getBindingResult());
         return handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public static class ResourceNotFoundException extends RuntimeException {
+        public ResourceNotFoundException(String message) {
+            super(message);
+        }
     }
 
     private List<ErroHandler> criarListaDeErros(BindingResult bindingResult) {

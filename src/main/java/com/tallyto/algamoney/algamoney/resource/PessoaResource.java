@@ -1,12 +1,17 @@
 package com.tallyto.algamoney.algamoney.resource;
 
 import com.tallyto.algamoney.algamoney.event.ResourceCreatedEvent;
+import com.tallyto.algamoney.algamoney.exception.ExceptionHandler;
 import com.tallyto.algamoney.algamoney.model.Pessoa;
 import com.tallyto.algamoney.algamoney.repository.PessoaRepository;
+import com.tallyto.algamoney.algamoney.service.PessoaService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +26,9 @@ public class PessoaResource {
 
     @Autowired
     private ApplicationEventPublisher publisher;
+
+    @Autowired
+    private PessoaService pessoaService;
 
     public PessoaResource(PessoaRepository pessoaRepository) {
         this.pessoaRepository = pessoaRepository;
@@ -42,6 +50,12 @@ public class PessoaResource {
         var pessoaSalva = this.pessoaRepository.save(pessoa);
         publisher.publishEvent(new ResourceCreatedEvent(this, response, pessoaSalva.getCodigo()));
         return ResponseEntity.status(HttpStatus.CREATED).body(pessoaSalva);
+    }
+
+    @PutMapping("/{codigo}")
+    public ResponseEntity<Pessoa> atualizar(@PathVariable Long codigo, @Valid @RequestBody Pessoa pessoa){
+        var pessoaSalva = this.pessoaService.atualizar(codigo, pessoa);
+        return ResponseEntity.ok(pessoaSalva);
     }
 
     @DeleteMapping("/{codigo}")
