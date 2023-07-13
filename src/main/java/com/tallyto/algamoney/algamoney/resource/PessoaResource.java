@@ -42,6 +42,11 @@ public class PessoaResource {
         var pessoaSalva = this.pessoaRepository.save(pessoa);
         publisher.publishEvent(new ResourceCreatedEvent(this, response, pessoaSalva.getCodigo()));
         return ResponseEntity.status(HttpStatus.CREATED).body(pessoaSalva);
+    }
 
+    @DeleteMapping("/{codigo}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void remover(@PathVariable Long codigo){
+        pessoaRepository.deleteById(codigo);
     }
 }

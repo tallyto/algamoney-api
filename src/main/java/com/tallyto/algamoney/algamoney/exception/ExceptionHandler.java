@@ -36,7 +36,6 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-
         var erros = criarListaDeErros(ex.getBindingResult());
         return handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST, request);
     }
