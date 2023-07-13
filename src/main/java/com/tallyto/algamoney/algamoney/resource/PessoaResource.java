@@ -1,11 +1,15 @@
 package com.tallyto.algamoney.algamoney.resource;
 
+import com.tallyto.algamoney.algamoney.event.ResourceCreatedEvent;
 import com.tallyto.algamoney.algamoney.model.Pessoa;
 import com.tallyto.algamoney.algamoney.repository.PessoaRepository;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +18,9 @@ import java.util.Optional;
 @RequestMapping("/pessoas")
 public class PessoaResource {
     private final PessoaRepository pessoaRepository;
+
+    @Autowired
+    private ApplicationEventPublisher publisher;
 
     public PessoaResource(PessoaRepository pessoaRepository) {
         this.pessoaRepository = pessoaRepository;
@@ -31,11 +38,10 @@ public class PessoaResource {
     }
 
     @PostMapping
-    public ResponseEntity<Pessoa> criar(@Valid @RequestBody Pessoa pessoa) {
+    public ResponseEntity<Pessoa> criar(@Valid @RequestBody Pessoa pessoa, HttpServletResponse response) {
         var pessoaSalva = this.pessoaRepository.save(pessoa);
-        var uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}")
-                .buildAndExpand(pessoaSalva.getCodigo()).toUri();
-        return ResponseEntity.created(uri).body(pessoaSalva);
+        publisher.publishEvent(new ResourceCreatedEvent(this, response, pessoaSalva.getCodigo()));
+        return ResponseEntity.status(HttpStatus.CREATED).body(pessoaSalva);
 
     }
 }

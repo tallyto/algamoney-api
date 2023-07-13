@@ -1,8 +1,13 @@
 package com.tallyto.algamoney.algamoney.resource;
 
+import com.tallyto.algamoney.algamoney.event.ResourceCreatedEvent;
 import com.tallyto.algamoney.algamoney.model.Categoria;
 import com.tallyto.algamoney.algamoney.repository.CategoriaRepository;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -14,6 +19,9 @@ import java.util.Optional;
 @RequestMapping("/categorias")
 public class CategoriaResource {
     private final CategoriaRepository categoriaRepository;
+
+    @Autowired
+    private ApplicationEventPublisher publisher;
 
     public CategoriaResource(CategoriaRepository categoriaRepository) {
         this.categoriaRepository = categoriaRepository;
@@ -31,11 +39,9 @@ public class CategoriaResource {
     }
 
     @PostMapping
-    public ResponseEntity<Categoria> criar(@Valid @RequestBody Categoria categoria) {
+    public ResponseEntity<Categoria> criar(@Valid @RequestBody Categoria categoria, HttpServletResponse response) {
       var categoriaSalva = this.categoriaRepository.save(categoria);
-      var uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}")
-                .buildAndExpand(categoriaSalva.getCodigo()).toUri();
-      return ResponseEntity.created(uri).body(categoriaSalva);
-
+      publisher.publishEvent(new ResourceCreatedEvent(this, response, categoria.getCodigo()));
+      return ResponseEntity.status(HttpStatus.CREATED).body(categoriaSalva);
     }
 }
