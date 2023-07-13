@@ -19,7 +19,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @ControllerAdvice
@@ -30,7 +29,7 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         var mensagem = messageSource.getMessage("mensagem.invalida", null, LocaleContextHolder.getLocale());
-        var devMessage = ex.getCause().getMessage();
+        var devMessage = ex.getCause() != null ? ex.getCause().toString() : ex.toString();
         var erros = List.of(new ErroHandler(mensagem, devMessage));
         return handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST, request);
     }

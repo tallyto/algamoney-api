@@ -1,17 +1,13 @@
 package com.tallyto.algamoney.algamoney.resource;
 
 import com.tallyto.algamoney.algamoney.event.ResourceCreatedEvent;
-import com.tallyto.algamoney.algamoney.exception.ExceptionHandler;
 import com.tallyto.algamoney.algamoney.model.Pessoa;
 import com.tallyto.algamoney.algamoney.repository.PessoaRepository;
 import com.tallyto.algamoney.algamoney.service.PessoaService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,6 +53,13 @@ public class PessoaResource {
         var pessoaSalva = this.pessoaService.atualizar(codigo, pessoa);
         return ResponseEntity.ok(pessoaSalva);
     }
+
+    @PutMapping("/{codigo}/ativo")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void atualizarPropriedadeAtivo(@PathVariable Long codigo,@RequestBody Boolean ativo){
+        this.pessoaService.atualizarPropriedadeAtivo(codigo, ativo);
+    }
+
 
     @DeleteMapping("/{codigo}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

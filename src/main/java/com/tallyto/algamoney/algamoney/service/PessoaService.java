@@ -14,8 +14,19 @@ public class PessoaService {
     private PessoaRepository pessoaRepository;
 
     public Pessoa atualizar(Long codigo, Pessoa pessoa) {
-        var pessoaSalva = pessoaRepository.findById(codigo).orElseThrow(() -> new ExceptionHandler.ResourceNotFoundException("pessoa nao encontrada"));
+        Pessoa pessoaSalva = getPessoaSalva(codigo);
         BeanUtils.copyProperties(pessoa, pessoaSalva, "codigo");
         return pessoaRepository.save(pessoaSalva);
+    }
+
+    private Pessoa getPessoaSalva(Long codigo) {
+        return pessoaRepository.findById(codigo).orElseThrow(() ->
+                new ExceptionHandler.ResourceNotFoundException("pessoa nao encontrada"));
+    }
+
+    public void atualizarPropriedadeAtivo(Long codigo, Boolean ativo) {
+        Pessoa pessoaSalva = getPessoaSalva(codigo);
+        pessoaSalva.setAtivo(ativo);
+        pessoaRepository.save(pessoaSalva);
     }
 }
