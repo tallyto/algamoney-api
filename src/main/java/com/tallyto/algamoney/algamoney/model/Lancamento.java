@@ -37,11 +37,11 @@ public class Lancamento {
     @Enumerated(EnumType.STRING)
     private TipoLancamento tipo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "codigo_categoria", nullable = false)
     private Categoria categoria;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "codigo_pessoa", nullable = false)
     private Pessoa pessoa;
 
