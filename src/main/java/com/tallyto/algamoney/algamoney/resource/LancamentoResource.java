@@ -4,6 +4,7 @@ import com.tallyto.algamoney.algamoney.event.ResourceCreatedEvent;
 import com.tallyto.algamoney.algamoney.exception.ExceptionUtils;
 import com.tallyto.algamoney.algamoney.exception.PessoaInexistenteOuInativaException;
 import com.tallyto.algamoney.algamoney.model.Lancamento;
+import com.tallyto.algamoney.algamoney.repository.filter.LancamentoFilter;
 import com.tallyto.algamoney.algamoney.service.LancamentoService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -34,8 +35,8 @@ public class LancamentoResource {
     }
 
     @GetMapping
-    public ResponseEntity<List<Lancamento>> listarLancamentos() {
-        List<Lancamento> lancamentos = lancamentoService.listarLancamentos();
+    public ResponseEntity<List<Lancamento>> pesquisar(LancamentoFilter filter) {
+        List<Lancamento> lancamentos = lancamentoService.pesquisar(filter);
         return ResponseEntity.ok(lancamentos);
     }
 
