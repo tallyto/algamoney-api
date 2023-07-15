@@ -19,7 +19,7 @@ public class PessoaService {
         return pessoaRepository.save(pessoaSalva);
     }
 
-    private Pessoa getPessoaSalva(Long codigo) {
+    public Pessoa getPessoaSalva(Long codigo) {
         return pessoaRepository.findById(codigo).orElseThrow(() ->
                 new ExceptionHandler.ResourceNotFoundException("pessoa nao encontrada"));
     }

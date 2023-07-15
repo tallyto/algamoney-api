@@ -1,7 +1,5 @@
 package com.tallyto.algamoney.algamoney.exception;
 
-import lombok.Getter;
-import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -32,7 +29,7 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         var mensagem = messageSource.getMessage("mensagem.invalida", null, LocaleContextHolder.getLocale());
         var devMessage = ex.getCause() != null ? ex.getCause().toString() : ex.toString();
-        var erros = List.of(new ErroHandler(mensagem, devMessage));
+        var erros = List.of(new ExceptionUtils.HandlerExceptionMessage(mensagem, devMessage));
         return handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST, request);
     }
 
@@ -49,12 +46,12 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
         }
     }
 
-    private List<ErroHandler> criarListaDeErros(BindingResult bindingResult) {
-        var erros = new ArrayList<ErroHandler>();
+    private List<ExceptionUtils.HandlerExceptionMessage> criarListaDeErros(BindingResult bindingResult) {
+        var erros = new ArrayList<ExceptionUtils.HandlerExceptionMessage>();
         for (FieldError fieldError : bindingResult.getFieldErrors()) {
             var mensagemUsuario = messageSource.getMessage(fieldError, LocaleContextHolder.getLocale());
             var mensagemDesenvolvedor = fieldError.toString();
-            erros.add(new ErroHandler(mensagemUsuario, mensagemDesenvolvedor));
+            erros.add(new ExceptionUtils.HandlerExceptionMessage(mensagemUsuario, mensagemDesenvolvedor));
         }
         return erros;
     }
@@ -63,20 +60,10 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException ex, WebRequest request ){
         var mensagem = messageSource.getMessage("recurso.operacao-nao-permitida", null, LocaleContextHolder.getLocale());
         var devMessage = Objects.requireNonNull(ex.getRootCause()).getMessage();
-        var erros = List.of(new ErroHandler(mensagem, devMessage));
+        var erros = List.of(new ExceptionUtils.HandlerExceptionMessage(mensagem, devMessage));
         return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
-    @Getter
-    @ToString
-    public static class ErroHandler {
-        String userMessage;
-        String devMessage;
 
-        public ErroHandler(String userMessage, String devMessage) {
-            this.userMessage = userMessage;
-            this.devMessage = devMessage;
-        }
-    }
 
 
 }

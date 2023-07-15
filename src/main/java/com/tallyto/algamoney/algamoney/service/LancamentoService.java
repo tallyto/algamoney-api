@@ -1,7 +1,10 @@
 package com.tallyto.algamoney.algamoney.service;
 
+import com.tallyto.algamoney.algamoney.exception.PessoaInexistenteOuInativaException;
 import com.tallyto.algamoney.algamoney.model.Lancamento;
+import com.tallyto.algamoney.algamoney.model.Pessoa;
 import com.tallyto.algamoney.algamoney.repository.LancamentoRepository;
+import com.tallyto.algamoney.algamoney.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +14,9 @@ import java.util.List;
 public class LancamentoService {
 
     private final LancamentoRepository lancamentoRepository;
+
+    @Autowired
+    private PessoaRepository pessoaRepository;
 
     @Autowired
     public LancamentoService(LancamentoRepository lancamentoRepository) {
@@ -26,6 +32,10 @@ public class LancamentoService {
     }
 
     public Lancamento criarLancamento(Lancamento lancamento) {
+        Pessoa pessoa = pessoaRepository.findById(lancamento.getPessoa().getCodigo()).orElse(null);
+        if (pessoa == null || pessoa.isInativo()){
+            throw new PessoaInexistenteOuInativaException();
+        }
         return lancamentoRepository.save(lancamento);
     }
 

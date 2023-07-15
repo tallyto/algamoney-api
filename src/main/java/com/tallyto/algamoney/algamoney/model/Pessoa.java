@@ -1,5 +1,6 @@
 package com.tallyto.algamoney.algamoney.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -22,4 +23,10 @@ public class Pessoa {
 
     @NotNull
     private Boolean ativo;
+
+    @JsonIgnore
+    @Transient
+    public boolean isInativo(){
+        return !this.ativo;
+    }
 }
