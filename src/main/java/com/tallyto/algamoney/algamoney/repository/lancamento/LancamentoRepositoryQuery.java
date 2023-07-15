@@ -6,5 +6,5 @@ import com.tallyto.algamoney.algamoney.repository.filter.LancamentoFilter;
 import java.util.List;
 
 public interface LancamentoRepositoryQuery {
-    public List<Lancamento> filtrar (LancamentoFilter filter);
+    public List<Lancamento> filtrar(LancamentoFilter filter);
 }

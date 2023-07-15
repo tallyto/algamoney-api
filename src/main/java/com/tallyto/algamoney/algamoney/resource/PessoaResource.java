@@ -31,12 +31,12 @@ public class PessoaResource {
     }
 
     @GetMapping
-    public List<Pessoa> listar(){
+    public List<Pessoa> listar() {
         return pessoaRepository.findAll();
     }
 
     @GetMapping("/{codigo}")
-    public ResponseEntity<Optional<Pessoa>> buscarPeloCodigo(@PathVariable Long codigo){
+    public ResponseEntity<Optional<Pessoa>> buscarPeloCodigo(@PathVariable Long codigo) {
         var pessoa = this.pessoaRepository.findById(codigo);
         return pessoa.isPresent() ? ResponseEntity.ok(pessoa) : ResponseEntity.notFound().build();
     }
@@ -49,21 +49,21 @@ public class PessoaResource {
     }
 
     @PutMapping("/{codigo}")
-    public ResponseEntity<Pessoa> atualizar(@PathVariable Long codigo, @Valid @RequestBody Pessoa pessoa){
+    public ResponseEntity<Pessoa> atualizar(@PathVariable Long codigo, @Valid @RequestBody Pessoa pessoa) {
         var pessoaSalva = this.pessoaService.atualizar(codigo, pessoa);
         return ResponseEntity.ok(pessoaSalva);
     }
 
     @PutMapping("/{codigo}/ativo")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void atualizarPropriedadeAtivo(@PathVariable Long codigo,@RequestBody Boolean ativo){
+    public void atualizarPropriedadeAtivo(@PathVariable Long codigo, @RequestBody Boolean ativo) {
         this.pessoaService.atualizarPropriedadeAtivo(codigo, ativo);
     }
 
 
     @DeleteMapping("/{codigo}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void remover(@PathVariable Long codigo){
+    public void remover(@PathVariable Long codigo) {
         pessoaRepository.deleteById(codigo);
     }
 }

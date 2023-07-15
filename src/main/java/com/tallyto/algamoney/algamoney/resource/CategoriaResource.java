@@ -28,20 +28,20 @@ public class CategoriaResource {
     }
 
     @GetMapping
-    public List<Categoria> listar(){
-       return categoriaRepository.findAll();
+    public List<Categoria> listar() {
+        return categoriaRepository.findAll();
     }
 
     @GetMapping("/{codigo}")
-    public ResponseEntity<Optional<Categoria>> buscarPeloCodigo(@PathVariable Long codigo){
+    public ResponseEntity<Optional<Categoria>> buscarPeloCodigo(@PathVariable Long codigo) {
         var categoria = this.categoriaRepository.findById(codigo);
         return categoria.isPresent() ? ResponseEntity.ok(categoria) : ResponseEntity.notFound().build();
     }
 
     @PostMapping
     public ResponseEntity<Categoria> criar(@Valid @RequestBody Categoria categoria, HttpServletResponse response) {
-      var categoriaSalva = this.categoriaRepository.save(categoria);
-      publisher.publishEvent(new ResourceCreatedEvent(this, response, categoria.getCodigo()));
-      return ResponseEntity.status(HttpStatus.CREATED).body(categoriaSalva);
+        var categoriaSalva = this.categoriaRepository.save(categoria);
+        publisher.publishEvent(new ResourceCreatedEvent(this, response, categoria.getCodigo()));
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoriaSalva);
     }
 }

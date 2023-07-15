@@ -28,6 +28,7 @@ public class LancamentoResource {
 
     @Autowired
     MessageSource messageSource;
+
     @Autowired
     public LancamentoResource(LancamentoService lancamentoService, ApplicationEventPublisher publisher) {
         this.lancamentoService = lancamentoService;

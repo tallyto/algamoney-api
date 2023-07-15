@@ -35,7 +35,7 @@ public class LancamentoService {
 
     public Lancamento criarLancamento(Lancamento lancamento) {
         Pessoa pessoa = pessoaRepository.findById(lancamento.getPessoa().getCodigo()).orElse(null);
-        if (pessoa == null || pessoa.isInativo()){
+        if (pessoa == null || pessoa.isInativo()) {
             throw new PessoaInexistenteOuInativaException();
         }
         return lancamentoRepository.save(lancamento);
