@@ -4,6 +4,7 @@ import com.tallyto.algamoney.algamoney.event.ResourceCreatedEvent;
 import com.tallyto.algamoney.algamoney.model.Lancamento;
 import com.tallyto.algamoney.algamoney.service.LancamentoService;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
@@ -42,7 +43,7 @@ public class LancamentoResource {
     }
 
     @PostMapping
-    public ResponseEntity<Lancamento> criarLancamento(@RequestBody Lancamento lancamento, HttpServletResponse response) {
+    public ResponseEntity<Lancamento> criarLancamento(@Valid @RequestBody Lancamento lancamento, HttpServletResponse response) {
         Lancamento novoLancamento = lancamentoService.criarLancamento(lancamento);
         publisher.publishEvent(new ResourceCreatedEvent(this, response, lancamento.getCodigo()));
         return ResponseEntity.status(HttpStatus.CREATED).body(novoLancamento);
