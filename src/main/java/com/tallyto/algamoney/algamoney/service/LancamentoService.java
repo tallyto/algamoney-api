@@ -7,9 +7,9 @@ import com.tallyto.algamoney.algamoney.repository.LancamentoRepository;
 import com.tallyto.algamoney.algamoney.repository.PessoaRepository;
 import com.tallyto.algamoney.algamoney.repository.filter.LancamentoFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class LancamentoService {
@@ -24,9 +24,9 @@ public class LancamentoService {
         this.lancamentoRepository = lancamentoRepository;
     }
 
-    public List<Lancamento> pesquisar(LancamentoFilter filter) {
+    public Page<Lancamento> filtrar(LancamentoFilter filter, Pageable pageable) {
 
-        return lancamentoRepository.filtrar(filter);
+        return lancamentoRepository.filtrar(filter, pageable);
     }
 
     public Lancamento buscarLancamentoPorCodigo(Long codigo) {
