@@ -1,6 +1,7 @@
 # Algamoney
 
-Este é o repositório do projeto Algamoney, que utiliza o Spring 3.2.0 e o Maven como gerenciador de dependências. O Algamoney visa realizar o gerenciamento de lançamentos financeiros.
+Este é o repositório do projeto Algamoney, que utiliza o Spring 3.2.0 e o Maven como gerenciador de dependências. O
+Algamoney visa realizar o gerenciamento de lançamentos financeiros.
 
 ## Instalação
 
@@ -35,8 +36,10 @@ O Algamoney utiliza as seguintes bibliotecas principais:
 - Spring Boot Data JPA: Biblioteca para integração com o banco de dados e persistência dos dados.
 - Spring Boot Web: Biblioteca para desenvolvimento de aplicações web utilizando o Spring MVC.
 - Spring Boot Validation: Biblioteca para validação dos dados utilizando o Bean Validation.
-- Spring Boot DevTools: Biblioteca para facilitar o desenvolvimento, fornecendo recursos como reinicialização automática da aplicação.
-- Lombok: Biblioteca para redução de código boilerplate, gerando automaticamente getters, setters, construtores e outros métodos.
+- Spring Boot DevTools: Biblioteca para facilitar o desenvolvimento, fornecendo recursos como reinicialização automática
+  da aplicação.
+- Lombok: Biblioteca para redução de código boilerplate, gerando automaticamente getters, setters, construtores e outros
+  métodos.
 - MySQL Connector/J: Driver para conexão com o banco de dados MySQL.
 - Flyway: Biblioteca para controle de migração de banco de dados.
 

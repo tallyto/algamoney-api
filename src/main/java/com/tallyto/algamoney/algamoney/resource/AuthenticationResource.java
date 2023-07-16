@@ -32,7 +32,7 @@ public class AuthenticationResource {
 
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody AuthenticationDTO data){
+    public ResponseEntity login(@RequestBody AuthenticationDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
@@ -41,11 +41,12 @@ public class AuthenticationResource {
 
         return ResponseEntity.ok(new LoginResponseDTO(token));
     }
+
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid RegisterDTO data){
+    public ResponseEntity register(@RequestBody @Valid RegisterDTO data) {
 
         var user = this.userRepository.findByLogin("tallyto");
-        if(user != null) {
+        if (user != null) {
             return ResponseEntity.badRequest().build();
         }
 

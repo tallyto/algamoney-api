@@ -38,7 +38,7 @@ public class LancamentoResource {
     }
 
     @GetMapping
-    public Page<Lancamento>pesquisar(LancamentoFilter filter, Pageable pageable) {
+    public Page<Lancamento> pesquisar(LancamentoFilter filter, Pageable pageable) {
         return lancamentoService.filtrar(filter, pageable);
     }
 
