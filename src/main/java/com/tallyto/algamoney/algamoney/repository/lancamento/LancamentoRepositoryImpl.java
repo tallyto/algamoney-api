@@ -1,6 +1,5 @@
 package com.tallyto.algamoney.algamoney.repository.lancamento;
 
-import com.mysql.cj.util.StringUtils;
 import com.tallyto.algamoney.algamoney.model.Lancamento;
 import com.tallyto.algamoney.algamoney.repository.filter.LancamentoFilter;
 import jakarta.persistence.EntityManager;
@@ -10,6 +9,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -44,7 +44,7 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
     private Predicate[] criarRestricoes(LancamentoFilter filter, CriteriaBuilder builder, Root<Lancamento> root) {
         List<Predicate> predicates = new ArrayList<>();
 
-        if (!StringUtils.isNullOrEmpty(filter.getDescricao())) {
+        if (!StringUtils.isEmpty(filter.getDescricao())) {
             predicates.add(builder.like(builder.lower(root.get("descricao")),
                     "%" + filter.getDescricao().toLowerCase() + "%"));
         }
