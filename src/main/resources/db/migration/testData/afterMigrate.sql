@@ -138,3 +138,84 @@ INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, obser
                         codigo_pessoa)
 VALUES ('Venda de produtos de beleza', '2023-07-22', NULL, 120.00, 'Produtos vendidos através de um canal online',
         'RECEITA', 5, 5);
+INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
+                        codigo_pessoa)
+VALUES ('Pagamento de aluguel', '2023-07-13', NULL, 1000.00, NULL, 'DESPESA', 1, 1);
+
+INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
+                        codigo_pessoa)
+VALUES ('Salário mensal', '2023-07-15', '2023-07-15', 2500.00, 'Recebido', 'RECEITA', 2, 2);
+
+INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
+                        codigo_pessoa)
+VALUES ('Compra de material de escritório', '2023-07-10', '2023-07-10', 150.50, 'Reembolso pendente', 'DESPESA', 1, 3);
+
+INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
+                        codigo_pessoa)
+VALUES ('Reembolso de despesas de viagem', '2023-07-20', NULL, 300.00, NULL, 'RECEITA', 2, 3);
+
+INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
+                        codigo_pessoa)
+VALUES ('Pagamento de empréstimo', '2023-07-18', NULL, 500.00, NULL, 'DESPESA', 3, 4);
+
+INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
+                        codigo_pessoa)
+VALUES ('Reembolso de despesas de viagem', '2023-07-22', NULL, 200.00, NULL, 'RECEITA', 7, 5);
+
+INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
+                        codigo_pessoa)
+VALUES ('Pagamento de conta de luz', '2023-07-14', '2023-07-14', 120.00, NULL, 'DESPESA', 6, 1);
+
+INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
+                        codigo_pessoa)
+VALUES ('Venda de livro usado', '2023-07-16', '2023-07-16', 50.00, NULL, 'RECEITA', 7, 2);
+
+INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
+                        codigo_pessoa)
+VALUES ('Pagamento de empréstimo', '2023-07-19', NULL, 800.00, 'Parcela 2', 'DESPESA', 3, 4);
+
+INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
+                        codigo_pessoa)
+VALUES ('Compra de roupas', '2023-07-17', '2023-07-17', 300.00, NULL, 'DESPESA', 2, 2);
+
+INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
+                        codigo_pessoa)
+VALUES ('Pagamento de mensalidade de academia', '2023-07-20', '2023-07-20', 80.00, NULL, 'DESPESA', 4, 3);
+
+INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
+                        codigo_pessoa)
+VALUES ('Venda de eletrônicos usados', '2023-07-18', NULL, 500.00, 'Itens vendidos no Mercado Livre', 'RECEITA', 1, 1);
+
+INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
+                        codigo_pessoa)
+VALUES ('Pagamento de impostos', '2023-07-23', NULL, 400.00, 'Impostos municipais', 'DESPESA', 3, 5);
+
+INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
+                        codigo_pessoa)
+VALUES ('Recebimento de aluguel', '2023-07-24', '2023-07-24', 800.00, NULL, 'RECEITA', 1, 4);
+
+INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
+                        codigo_pessoa)
+VALUES ('Compra de decoração para casa', '2023-07-15', '2023-07-15', 150.00, 'Itens comprados em uma loja de decoração',
+        'DESPESA', 3, 3);
+
+INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
+                        codigo_pessoa)
+VALUES ('Pagamento de mensalidade de TV a cabo', '2023-07-21', '2023-07-21', 90.00, NULL, 'DESPESA', 7, 2);
+
+INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
+                        codigo_pessoa)
+VALUES ('Recebimento de reembolso médico', '2023-07-25', NULL, 200.00, 'Reembolso de consulta médica', 'RECEITA', 5, 3);
+
+INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
+                        codigo_pessoa)
+VALUES ('Compra de alimentos', '2023-07-14', '2023-07-14', 80.00, NULL, 'DESPESA', 6, 1);
+
+INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
+                        codigo_pessoa)
+VALUES ('Pagamento de mensalidade de academia', '2023-07-19', '2023-07-19', 100.00, NULL, 'DESPESA', 4, 4);
+
+INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
+                        codigo_pessoa)
+VALUES ('Venda de produtos de beleza', '2023-07-22', NULL, 120.00, 'Produtos vendidos através de um canal online',
+        'RECEITA', 5, 5);
