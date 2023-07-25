@@ -4,7 +4,7 @@ import com.tallyto.algamoney.algamoney.event.ResourceCreatedEvent;
 import com.tallyto.algamoney.algamoney.exception.ExceptionUtils;
 import com.tallyto.algamoney.algamoney.exception.PessoaInexistenteOuInativaException;
 import com.tallyto.algamoney.algamoney.model.Lancamento;
-import com.tallyto.algamoney.algamoney.repository.filter.LancamentoFilter;
+import com.tallyto.algamoney.algamoney.repository.lancamento.filter.LancamentoFilter;
 import com.tallyto.algamoney.algamoney.service.LancamentoService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;

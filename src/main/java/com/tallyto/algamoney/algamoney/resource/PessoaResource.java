@@ -1,13 +1,18 @@
 package com.tallyto.algamoney.algamoney.resource;
 
 import com.tallyto.algamoney.algamoney.event.ResourceCreatedEvent;
+import com.tallyto.algamoney.algamoney.model.Lancamento;
 import com.tallyto.algamoney.algamoney.model.Pessoa;
-import com.tallyto.algamoney.algamoney.repository.PessoaRepository;
+import com.tallyto.algamoney.algamoney.repository.lancamento.filter.LancamentoFilter;
+import com.tallyto.algamoney.algamoney.repository.pessoa.PessoaRepository;
+import com.tallyto.algamoney.algamoney.repository.pessoa.filter.PessoaFilter;
 import com.tallyto.algamoney.algamoney.service.PessoaService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +36,8 @@ public class PessoaResource {
     }
 
     @GetMapping
-    public List<Pessoa> listar() {
-        return pessoaRepository.findAll();
+    public Page<Pessoa> pesquisar(PessoaFilter filter, Pageable pageable) {
+        return pessoaService.filtrar(filter, pageable);
     }
 
     @GetMapping("/{codigo}")

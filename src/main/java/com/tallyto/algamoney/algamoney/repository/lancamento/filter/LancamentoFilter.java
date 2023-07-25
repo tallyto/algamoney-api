@@ -1,4 +1,4 @@
-package com.tallyto.algamoney.algamoney.repository.filter;
+package com.tallyto.algamoney.algamoney.repository.lancamento.filter;
 
 import lombok.Getter;
 import lombok.Setter;

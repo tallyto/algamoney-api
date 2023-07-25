@@ -40,21 +40,125 @@ VALUES ('Livros');
 INSERT INTO categoria (nome)
 VALUES ('Viagens');
 
--- Pessoa
-INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep)
-VALUES ('João', TRUE, 'Rua A', '123', 'Apto 1', 'Centro', '12345-678');
+-- Script 1
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('João', TRUE, 'Rua A', '123', 'Apto 1', 'Centro', '12345-678', 'São Paulo', 'SP');
 
-INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep)
-VALUES ('Maria', TRUE, 'Rua B', '456', NULL, 'Vila Nova', '98765-432');
+-- Script 2
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Maria', TRUE, 'Rua B', '456', NULL, 'Vila Nova', '98765-432', 'Rio de Janeiro', 'RJ');
 
-INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep)
-VALUES ('Pedro', FALSE, 'Rua C', '789', 'Casa 2', 'Jardim', '54321-876');
+-- Script 3
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Pedro', FALSE, 'Rua C', '789', 'Casa 2', 'Jardim', '54321-876', 'Belo Horizonte', 'MG');
 
-INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep)
-VALUES ('Ana', TRUE, 'Rua D', '321', NULL, 'Liberdade', '67890-123');
+-- Script 4
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Ana', TRUE, 'Rua D', '321', NULL, 'Liberdade', '67890-123', 'Curitiba', 'PR');
 
-INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep)
-VALUES ('Carlos', FALSE, 'Rua E', '654', 'Sala 3', 'Industrial', '21098-765');
+-- Script 5
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Carlos', FALSE, 'Rua E', '654', 'Sala 3', 'Industrial', '21098-765', 'Porto Alegre', 'RS');
+
+-- Script 6
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Julia', TRUE, 'Rua F', '987', NULL, 'Centro', '13579-246', 'Salvador', 'BA');
+
+-- Script 7
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Lucas', TRUE, 'Rua G', '753', 'Apto 5', 'Vila Nova', '97531-864', 'Recife', 'PE');
+
+-- Script 8
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Mariana', FALSE, 'Rua H', '159', 'Casa 10', 'Liberdade', '26479-358', 'Fortaleza', 'CE');
+
+-- Script 9
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Rafael', TRUE, 'Rua I', '246', NULL, 'Industrial', '78945-123', 'Brasília', 'DF');
+
+-- Script 10
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Sophia', TRUE, 'Rua J', '987', 'Apto 20', 'Centro', '65432-987', 'Manaus', 'AM');
+
+-- Registro 11
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Fernanda', TRUE, 'Rua K', '789', NULL, 'Vila Nova', '45678-123', 'Porto Velho', 'RO');
+
+-- Registro 12
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Gabriel', FALSE, 'Rua L', '321', 'Casa 5', 'Centro', '98765-432', 'Florianópolis', 'SC');
+
+-- Registro 13
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Isabela', TRUE, 'Rua M', '654', NULL, 'Liberdade', '54321-876', 'Goiânia', 'GO');
+
+-- Registro 14
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Leonardo', TRUE, 'Rua N', '987', 'Apto 10', 'Jardim', '21098-765', 'São Luís', 'MA');
+
+-- Registro 15
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Luiza', FALSE, 'Rua O', '159', 'Sala 2', 'Industrial', '67890-123', 'Belém', 'PA');
+
+-- Registro 16
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Matheus', TRUE, 'Rua P', '753', NULL, 'Vila Nova', '54321-987', 'Natal', 'RN');
+
+-- Registro 17
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Beatriz', TRUE, 'Rua Q', '987', 'Apto 15', 'Centro', '98765-432', 'Aracaju', 'SE');
+
+-- Registro 18
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Arthur', FALSE, 'Rua R', '321', 'Casa 7', 'Liberdade', '23456-789', 'Cuiabá', 'MT');
+
+-- Registro 19
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Lara', TRUE, 'Rua S', '654', NULL, 'Jardim', '67890-543', 'João Pessoa', 'PB');
+
+-- Registro 20
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Enzo', TRUE, 'Rua T', '987', 'Apto 8', 'Centro', '54321-987', 'Teresina', 'PI');
+
+-- Registro 21
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Sophie', FALSE, 'Rua U', '159', 'Casa 3', 'Vila Nova', '87654-321', 'Boa Vista', 'RR');
+
+-- Registro 22
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Davi', TRUE, 'Rua V', '753', NULL, 'Industrial', '76543-210', 'Palmas', 'TO');
+
+-- Registro 23
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Valentina', TRUE, 'Rua W', '987', 'Apto 12', 'Liberdade', '98765-321', 'Rio Branco', 'AC');
+
+-- Registro 24
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Benjamin', FALSE, 'Rua X', '321', 'Casa 9', 'Centro', '12345-987', 'Macapá', 'AP');
+
+-- Registro 25
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Alice', TRUE, 'Rua Y', '654', NULL, 'Vila Nova', '54321-678', 'Campo Grande', 'MS');
+
+-- Registro 26
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Bernardo', TRUE, 'Rua Z', '987', 'Apto 7', 'Industrial', '87654-321', 'Porto Alegre', 'RS');
+
+-- Registro 27
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Laura', FALSE, 'Rua 1', '159', 'Casa 4', 'Liberdade', '54321-765', 'Salvador', 'BA');
+
+-- Registro 28
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Davi Lucas', TRUE, 'Rua 2', '753', NULL, 'Jardim', '98765-210', 'Recife', 'PE');
+
+-- Registro 29
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Helena', TRUE, 'Rua 3', '987', 'Apto 9', 'Centro', '76543-987', 'Fortaleza', 'CE');
+
+-- Registro 30
+INSERT INTO pessoa (nome, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado)
+VALUES ('Pedro Henrique', FALSE, 'Rua 4', '321', 'Casa 8', 'Vila Nova', '67890-543', 'Brasília', 'DF');
 
 -- Lancamentos
 INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,

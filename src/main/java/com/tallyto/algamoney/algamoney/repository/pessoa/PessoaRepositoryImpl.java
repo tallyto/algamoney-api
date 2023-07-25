@@ -1,7 +1,7 @@
-package com.tallyto.algamoney.algamoney.repository.lancamento;
+package com.tallyto.algamoney.algamoney.repository.pessoa;
 
-import com.tallyto.algamoney.algamoney.model.Lancamento;
-import com.tallyto.algamoney.algamoney.repository.lancamento.filter.LancamentoFilter;
+import com.tallyto.algamoney.algamoney.model.Pessoa;
+import com.tallyto.algamoney.algamoney.repository.pessoa.filter.PessoaFilter;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -19,48 +19,53 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
-
+public class PessoaRepositoryImpl implements PessoaRepositoryQuery {
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
-    public Page<Lancamento> filtrar(LancamentoFilter filter, Pageable pageable) {
+    public Page<Pessoa> filtrar(PessoaFilter filter, Pageable pageable) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Lancamento> criteriaQuery = builder.createQuery(Lancamento.class);
-        Root<Lancamento> root = criteriaQuery.from(Lancamento.class);
+        CriteriaQuery<Pessoa> criteriaQuery = builder.createQuery(Pessoa.class);
+        Root<Pessoa> root = criteriaQuery.from(Pessoa.class);
 
         // Cria as restrições
         Predicate[] predicates = criarRestricoes(filter, builder, root);
         criteriaQuery.where(predicates);
 
-        TypedQuery<Lancamento> query = entityManager.createQuery(criteriaQuery);
+        TypedQuery<Pessoa> query = entityManager.createQuery(criteriaQuery);
         adicionarRestricoesDePaginacao(query, pageable);
 
 
         return new PageImpl<>(query.getResultList(), pageable, total(filter));
     }
 
-    private Predicate[] criarRestricoes(LancamentoFilter filter, CriteriaBuilder builder, Root<Lancamento> root) {
+    private Predicate[] criarRestricoes(PessoaFilter filter, CriteriaBuilder builder, Root<Pessoa> root) {
         List<Predicate> predicates = new ArrayList<>();
 
-        if (!StringUtils.isEmpty(filter.getDescricao())) {
-            predicates.add(builder.like(builder.lower(root.get("descricao")),
-                    "%" + filter.getDescricao().toLowerCase() + "%"));
+        if (!StringUtils.isEmpty(filter.getNome())) {
+            predicates.add(builder.like(builder.lower(root.get("nome")),
+                    "%" + filter.getNome().toLowerCase() + "%"));
         }
 
-        if (filter.getDataDeVencimentoDe() != null) {
-            predicates.add(builder.greaterThanOrEqualTo(root.get("dataVencimento"), filter.getDataDeVencimentoDe()));
+        if (!StringUtils.isEmpty(filter.getCidade())) {
+            predicates.add(builder.like(builder.lower(root.get("cidade")),
+                    "%" + filter.getCidade().toLowerCase() + "%"));
         }
 
-        if (filter.getDataDeVencimentoAte() != null) {
-            predicates.add(builder.lessThanOrEqualTo(root.get("dataVencimento"), filter.getDataDeVencimentoAte()));
+        if (!StringUtils.isEmpty(filter.getEstado())) {
+            predicates.add(builder.like(builder.lower(root.get("estado")),
+                    "%" + filter.getEstado().toLowerCase() + "%"));
+        }
+
+        if (filter.getAtivo() != null) {
+            predicates.add(builder.equal(root.get("ativo"), filter.getAtivo()));
         }
 
         return predicates.toArray(new Predicate[0]);
     }
 
-    private void adicionarRestricoesDePaginacao(TypedQuery<Lancamento> query, Pageable pageable) {
+    private void adicionarRestricoesDePaginacao(TypedQuery<Pessoa> query, Pageable pageable) {
         int paginaAtual = pageable.getPageNumber();
         int totalDeRegistrosPorPagina = pageable.getPageSize();
         int primeiroRegistroDaPagina = paginaAtual * totalDeRegistrosPorPagina;
@@ -68,10 +73,10 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
         query.setMaxResults(totalDeRegistrosPorPagina);
     }
 
-    private Long total(LancamentoFilter filter) {
+    private Long total(PessoaFilter filter) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
-        Root<Lancamento> root = criteria.from(Lancamento.class);
+        Root<Pessoa> root = criteria.from(Pessoa.class);
 
         Predicate[] predicates = criarRestricoes(filter, builder, root);
 

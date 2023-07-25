@@ -1,4 +1,4 @@
-package com.tallyto.algamoney.algamoney.repository;
+package com.tallyto.algamoney.algamoney.repository.lancamento;
 
 import com.tallyto.algamoney.algamoney.model.Lancamento;
 import com.tallyto.algamoney.algamoney.repository.lancamento.LancamentoRepositoryQuery;
