@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -32,6 +33,21 @@ public class PessoaRepositoryImpl implements PessoaRepositoryQuery {
         // Cria as restrições
         Predicate[] predicates = criarRestricoes(filter, builder, root);
         criteriaQuery.where(predicates);
+
+        // Adicionar ordenação pela data de última modificação
+        if (pageable.getSort().isUnsorted()) {
+            criteriaQuery.orderBy(builder.desc(root.get("ativo")));
+        } else {
+            Sort.Order sortOrder = pageable.getSort().get().findFirst().get();
+            String property = sortOrder.getProperty();
+            Sort.Direction direction = sortOrder.getDirection();
+            if (direction == Sort.Direction.DESC) {
+                criteriaQuery.orderBy(builder.desc(root.get(property)));
+            } else {
+                criteriaQuery.orderBy(builder.asc(root.get(property)));
+            }
+        }
+
 
         TypedQuery<Pessoa> query = entityManager.createQuery(criteriaQuery);
         adicionarRestricoesDePaginacao(query, pageable);
