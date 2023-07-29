@@ -11,6 +11,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Pessoa {
+    public Pessoa(){}
+
+    public Pessoa(Integer codigo){
+        this.codigo = Long.valueOf(codigo);
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;

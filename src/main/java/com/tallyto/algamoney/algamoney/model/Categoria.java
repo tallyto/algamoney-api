@@ -12,6 +12,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Categoria {
+    public Categoria() {}
+
+    public Categoria(Integer codigo){
+        this.codigo = Long.valueOf(codigo);
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
