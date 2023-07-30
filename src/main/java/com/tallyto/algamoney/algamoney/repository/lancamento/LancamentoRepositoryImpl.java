@@ -1,6 +1,7 @@
 package com.tallyto.algamoney.algamoney.repository.lancamento;
 
 import com.tallyto.algamoney.algamoney.dto.LancamentoEstatisticaCategoria;
+import com.tallyto.algamoney.algamoney.dto.LancamentoEstatisticaDia;
 import com.tallyto.algamoney.algamoney.model.Lancamento;
 import com.tallyto.algamoney.algamoney.repository.lancamento.filter.LancamentoFilter;
 import jakarta.persistence.EntityManager;
@@ -46,9 +47,12 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
     @Override
     public List<LancamentoEstatisticaCategoria> porCategoria(LocalDate mesReferencia) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+
         CriteriaQuery<LancamentoEstatisticaCategoria> criteriaQuery = criteriaBuilder
                 .createQuery(LancamentoEstatisticaCategoria.class);
+
         Root<Lancamento> root = criteriaQuery.from(Lancamento.class);
+
         criteriaQuery.select(criteriaBuilder.construct(LancamentoEstatisticaCategoria.class,
                 root.get("categoria"), criteriaBuilder.sum(root.get("valor"))));
 
@@ -61,6 +65,32 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
         criteriaQuery.groupBy(root.get("categoria"));
 
         TypedQuery<LancamentoEstatisticaCategoria> typedQuery = entityManager.createQuery(criteriaQuery);
+
+        return typedQuery.getResultList();
+    }
+
+    @Override
+    public List<LancamentoEstatisticaDia> porDia(LocalDate mesReferencia) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<LancamentoEstatisticaDia> criteriaQuery = criteriaBuilder
+                .createQuery(LancamentoEstatisticaDia.class);
+
+        Root<Lancamento> root = criteriaQuery.from(Lancamento.class);
+
+        criteriaQuery.select(criteriaBuilder.construct(LancamentoEstatisticaDia.class,
+                root.get("tipo"), root.get("dataVencimento"), criteriaBuilder.sum(root.get("valor"))));
+
+        LocalDate primeiroDia = mesReferencia.withDayOfMonth(1);
+
+        LocalDate ultimoDia = mesReferencia.withDayOfMonth(mesReferencia.lengthOfMonth());
+
+        criteriaQuery.where(criteriaBuilder.greaterThanOrEqualTo(root.get("dataVencimento"), primeiroDia),
+                criteriaBuilder.lessThanOrEqualTo(root.get("dataVencimento"), ultimoDia));
+
+        criteriaQuery.groupBy(root.get("tipo"),root.get("dataVencimento"));
+
+        TypedQuery<LancamentoEstatisticaDia> typedQuery = entityManager.createQuery(criteriaQuery);
 
         return typedQuery.getResultList();
     }

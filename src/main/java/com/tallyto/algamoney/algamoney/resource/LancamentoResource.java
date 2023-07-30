@@ -1,6 +1,7 @@
 package com.tallyto.algamoney.algamoney.resource;
 
 import com.tallyto.algamoney.algamoney.dto.LancamentoEstatisticaCategoria;
+import com.tallyto.algamoney.algamoney.dto.LancamentoEstatisticaDia;
 import com.tallyto.algamoney.algamoney.event.ResourceCreatedEvent;
 import com.tallyto.algamoney.algamoney.exception.ExceptionUtils;
 import com.tallyto.algamoney.algamoney.exception.PessoaInexistenteOuInativaException;
@@ -51,6 +52,11 @@ public class LancamentoResource {
     @GetMapping("/estatisticas/por-categoria")
     public List<LancamentoEstatisticaCategoria> porCategoria() {
         return repository.porCategoria(LocalDate.now());
+    }
+
+    @GetMapping("/estatisticas/por-dia")
+    public List<LancamentoEstatisticaDia> porDia() {
+        return repository.porDia(LocalDate.now());
     }
 
     @GetMapping("/{codigo}")

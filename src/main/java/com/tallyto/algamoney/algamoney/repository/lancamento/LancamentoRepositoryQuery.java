@@ -1,6 +1,7 @@
 package com.tallyto.algamoney.algamoney.repository.lancamento;
 
 import com.tallyto.algamoney.algamoney.dto.LancamentoEstatisticaCategoria;
+import com.tallyto.algamoney.algamoney.dto.LancamentoEstatisticaDia;
 import com.tallyto.algamoney.algamoney.model.Lancamento;
 import com.tallyto.algamoney.algamoney.repository.lancamento.filter.LancamentoFilter;
 import org.springframework.data.domain.Page;
@@ -13,4 +14,5 @@ public interface LancamentoRepositoryQuery {
     public Page<Lancamento> filtrar(LancamentoFilter filter, Pageable pageable);
 
     public List<LancamentoEstatisticaCategoria> porCategoria(LocalDate mesReferencia);
+    public List<LancamentoEstatisticaDia> porDia(LocalDate mesReferencia);
 }

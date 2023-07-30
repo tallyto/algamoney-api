@@ -7,17 +7,23 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class LancamentoEstatisticaDia {
 
     private TipoLancamento tipoLancamento;
-
-    private LocalDate dia;
-
+    private Timestamp dia;
     private BigDecimal total;
+
+    public LancamentoEstatisticaDia(TipoLancamento tipoLancamento, BigDecimal total) {
+        this.tipoLancamento = tipoLancamento;
+        this.total = total;
+    }
+
+    // Getters e setters (se necessário)...
 }
