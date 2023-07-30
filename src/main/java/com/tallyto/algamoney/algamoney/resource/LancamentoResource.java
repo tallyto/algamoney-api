@@ -1,9 +1,11 @@
 package com.tallyto.algamoney.algamoney.resource;
 
+import com.tallyto.algamoney.algamoney.dto.LancamentoEstatisticaCategoria;
 import com.tallyto.algamoney.algamoney.event.ResourceCreatedEvent;
 import com.tallyto.algamoney.algamoney.exception.ExceptionUtils;
 import com.tallyto.algamoney.algamoney.exception.PessoaInexistenteOuInativaException;
 import com.tallyto.algamoney.algamoney.model.Lancamento;
+import com.tallyto.algamoney.algamoney.repository.lancamento.LancamentoRepository;
 import com.tallyto.algamoney.algamoney.repository.lancamento.filter.LancamentoFilter;
 import com.tallyto.algamoney.algamoney.service.LancamentoService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -32,6 +35,9 @@ public class LancamentoResource {
     MessageSource messageSource;
 
     @Autowired
+    LancamentoRepository repository;
+
+    @Autowired
     public LancamentoResource(LancamentoService lancamentoService, ApplicationEventPublisher publisher) {
         this.lancamentoService = lancamentoService;
         this.publisher = publisher;
@@ -40,6 +46,11 @@ public class LancamentoResource {
     @GetMapping
     public Page<Lancamento> pesquisar(LancamentoFilter filter, Pageable pageable) {
         return lancamentoService.filtrar(filter, pageable);
+    }
+
+    @GetMapping("/estatisticas/por-categoria")
+    public List<LancamentoEstatisticaCategoria> porCategoria() {
+        return repository.porCategoria(LocalDate.now());
     }
 
     @GetMapping("/{codigo}")

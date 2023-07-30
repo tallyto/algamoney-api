@@ -1,5 +1,6 @@
 package com.tallyto.algamoney.algamoney.repository.lancamento;
 
+import com.tallyto.algamoney.algamoney.dto.LancamentoEstatisticaCategoria;
 import com.tallyto.algamoney.algamoney.model.Lancamento;
 import com.tallyto.algamoney.algamoney.repository.lancamento.filter.LancamentoFilter;
 import jakarta.persistence.EntityManager;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +41,28 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 
 
         return new PageImpl<>(query.getResultList(), pageable, total(filter));
+    }
+
+    @Override
+    public List<LancamentoEstatisticaCategoria> porCategoria(LocalDate mesReferencia) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<LancamentoEstatisticaCategoria> criteriaQuery = criteriaBuilder
+                .createQuery(LancamentoEstatisticaCategoria.class);
+        Root<Lancamento> root = criteriaQuery.from(Lancamento.class);
+        criteriaQuery.select(criteriaBuilder.construct(LancamentoEstatisticaCategoria.class,
+                root.get("categoria"), criteriaBuilder.sum(root.get("valor"))));
+
+        LocalDate primeiroDia = mesReferencia.withDayOfMonth(1);
+        LocalDate ultimoDia = mesReferencia.withDayOfMonth(mesReferencia.lengthOfMonth());
+
+        criteriaQuery.where(criteriaBuilder.greaterThanOrEqualTo(root.get("dataVencimento"), primeiroDia),
+                criteriaBuilder.lessThanOrEqualTo(root.get("dataVencimento"), ultimoDia));
+
+        criteriaQuery.groupBy(root.get("categoria"));
+
+        TypedQuery<LancamentoEstatisticaCategoria> typedQuery = entityManager.createQuery(criteriaQuery);
+
+        return typedQuery.getResultList();
     }
 
     private Predicate[] criarRestricoes(LancamentoFilter filter, CriteriaBuilder builder, Root<Lancamento> root) {

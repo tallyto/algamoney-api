@@ -45,7 +45,7 @@ public class AuthenticationResource {
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody @Valid RegisterDTO data) {
 
-        var user = this.userRepository.findByLogin("tallyto");
+        var user = this.userRepository.findByLogin(data.login());
         if (user != null) {
             return ResponseEntity.badRequest().build();
         }
