@@ -56,7 +56,7 @@ public class LancamentoResource {
 
     @GetMapping("/estatisticas/por-dia")
     public List<LancamentoEstatisticaDia> porDia() {
-        return repository.porDia(LocalDate.now());
+        return repository.porDia(LocalDate.now().withMonth(2));
     }
 
     @GetMapping("/{codigo}")

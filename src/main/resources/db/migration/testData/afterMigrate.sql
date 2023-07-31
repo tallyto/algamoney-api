@@ -179,27 +179,27 @@ VALUES ('Reembolso de despesas de viagem', '2023-07-20', NULL, 300.00, NULL, 'RE
 
 INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
                         codigo_pessoa)
-VALUES ('Pagamento de empréstimo', '2023-07-18', NULL, 500.00, NULL, 'DESPESA', 3, 4);
+VALUES ('Pagamento de empréstimo', '2023-02-18', NULL, 500.00, NULL, 'DESPESA', 3, 4);
 
 INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
                         codigo_pessoa)
-VALUES ('Reembolso de despesas de viagem', '2023-07-22', NULL, 200.00, NULL, 'RECEITA', 7, 5);
+VALUES ('Reembolso de despesas de viagem', '2023-02-22', NULL, 200.00, NULL, 'RECEITA', 7, 5);
 
 INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
                         codigo_pessoa)
-VALUES ('Pagamento de conta de luz', '2023-07-14', '2023-07-14', 120.00, NULL, 'DESPESA', 6, 1);
+VALUES ('Pagamento de conta de luz', '2023-02-14', '2023-02-14', 120.00, NULL, 'DESPESA', 6, 1);
 
 INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
                         codigo_pessoa)
-VALUES ('Venda de livro usado', '2023-07-16', '2023-07-16', 50.00, NULL, 'RECEITA', 7, 2);
+VALUES ('Venda de livro usado', '2023-02-16', '2023-02-16', 50.00, NULL, 'RECEITA', 7, 2);
 
 INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
                         codigo_pessoa)
-VALUES ('Pagamento de empréstimo', '2023-07-19', NULL, 800.00, 'Parcela 2', 'DESPESA', 3, 4);
+VALUES ('Pagamento de empréstimo', '2023-02-19', NULL, 800.00, 'Parcela 2', 'DESPESA', 3, 4);
 
 INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
                         codigo_pessoa)
-VALUES ('Compra de roupas', '2023-07-17', '2023-07-17', 300.00, NULL, 'DESPESA', 2, 2);
+VALUES ('Compra de roupas', '2023-02-17', '2023-02-17', 300.00, NULL, 'DESPESA', 2, 2);
 
 INSERT INTO lancamento (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, codigo_categoria,
                         codigo_pessoa)
