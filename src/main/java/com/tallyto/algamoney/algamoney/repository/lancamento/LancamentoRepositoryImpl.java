@@ -93,6 +93,8 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 
         criteriaQuery.groupBy(root.get("tipo"), root.get("dataVencimento"));
 
+        criteriaQuery.orderBy(criteriaBuilder.asc(root.get("dataVencimento")));
+
         TypedQuery<LancamentoEstatisticaDia> typedQuery = entityManager.createQuery(criteriaQuery);
 
         return typedQuery.getResultList();
