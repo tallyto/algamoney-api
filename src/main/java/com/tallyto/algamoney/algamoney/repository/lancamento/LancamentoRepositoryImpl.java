@@ -2,6 +2,7 @@ package com.tallyto.algamoney.algamoney.repository.lancamento;
 
 import com.tallyto.algamoney.algamoney.dto.LancamentoEstatisticaCategoria;
 import com.tallyto.algamoney.algamoney.dto.LancamentoEstatisticaDia;
+import com.tallyto.algamoney.algamoney.dto.LancamentoEstatisticaPessoa;
 import com.tallyto.algamoney.algamoney.model.Lancamento;
 import com.tallyto.algamoney.algamoney.repository.lancamento.filter.LancamentoFilter;
 import jakarta.persistence.EntityManager;
@@ -93,6 +94,30 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
         criteriaQuery.groupBy(root.get("tipo"), root.get("dataVencimento"));
 
         TypedQuery<LancamentoEstatisticaDia> typedQuery = entityManager.createQuery(criteriaQuery);
+
+        return typedQuery.getResultList();
+    }
+
+    @Override
+    public List<LancamentoEstatisticaPessoa> porPessoa(LocalDate inicio, LocalDate fim) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<LancamentoEstatisticaPessoa> criteriaQuery = criteriaBuilder
+                .createQuery(LancamentoEstatisticaPessoa.class);
+
+        Root<Lancamento> root = criteriaQuery.from(Lancamento.class);
+
+        criteriaQuery.select(criteriaBuilder.construct(LancamentoEstatisticaPessoa.class,
+                root.get("tipo"),
+                root.get("pessoa"),
+                criteriaBuilder.sum(root.get("valor"))));
+
+        criteriaQuery.where(criteriaBuilder.greaterThanOrEqualTo(root.get("dataVencimento"), inicio),
+                criteriaBuilder.lessThanOrEqualTo(root.get("dataVencimento"), fim));
+
+        criteriaQuery.groupBy(root.get("tipo"), root.get("pessoa"));
+
+        TypedQuery<LancamentoEstatisticaPessoa> typedQuery = entityManager.createQuery(criteriaQuery);
 
         return typedQuery.getResultList();
     }
