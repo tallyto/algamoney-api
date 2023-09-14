@@ -52,27 +52,6 @@ Se desejar contribuir para o Algamoney, siga as etapas abaixo:
 3. Faça as alterações necessárias e adicione os commits relacionados.
 4. Envie um pull request para podermos revisar suas alterações.
 
-## Histórico de Commits
-
-- 5.5 - Validando lançamento com Bean Validation
-- 5.1 - Validando inconsistências
-- 5.3 - Desafio: cadastrando o primeiro lançamento
-- 5.2 - Desafio: lista e busca de lançamentos
-- 5.1 - Criando a migração e entidade de lançamento
-- 4.4 - Implementando atualização parcial com PUT
-- Atualizando pessoas com PUT
-- Adicionando change log
-- 4.1 - Removendo pessoa com DELETE
-- 3.12 - Usando eventos para adicionar header location
-- 3.11 - Desafio: criando o cadastro de pessoa
-- 3.10 - Validando valores inválidos com Bean Validation
-- 3.9 - Tratando erros com exception handler
-- 3.8 - Validando atributos desconhecidos
-- 3.7 - Desafio: retornar 404 caso não exista a categoria
-- 3.6 - Cadastrando nova categoria com POST
-- 3.4 - Consultando primeiro recurso com GET
-- 3.3 - Migração de dados com Flyway
-
 ## Equipe
 
 Este projeto é mantido por Tállyto ([GitHub](https://github.com/tallyto)).
